@@ -39,3 +39,16 @@ export function getAverageAge(employees: EmployeeStatistics[]): number {
     }
     return totalAge / employees.length;
 }
+
+export function getHighestPaidEmployee(employees: EmployeeStatistics[]): EmployeeStatistics {
+    if (employees.length === 0) {
+        throw new Error("Nincs dolgozó");
+    }
+    let highestPaidEmployee = employees[0];
+    for (const emp of employees) {
+        if (emp.salary > highestPaidEmployee.salary) {
+            highestPaidEmployee = emp;
+        }
+    }
+    return highestPaidEmployee;
+}
