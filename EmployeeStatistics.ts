@@ -1,54 +1,62 @@
+export interface Employee {
+    name: string;
+    age: number;
+    salary: number;
+}
+
 export class EmployeeStatistics {
-    constructor (
-        public readonly name: string, 
-        public readonly age: number, 
-        public readonly salary: number
-    ) {
-        if (name === "") {
+    private employees: Employee[];
+
+    constructor(employees: Employee[]) {
+        if (!employees || employees.length === 0) {
             throw new Error("A dolgozók megadása kötelező");
         }
-        if (age < 0) {
-            throw new Error("Az életkor nem lehet negatív");
-        }
-        if (salary < 0) {
-            throw new Error("A fizetés nem lehet negatív");
-        }
+        this.employees = employees;
     }
-}
 
-export function getMaxSalary(employees: EmployeeStatistics[]): number {
-    if (employees.length === 0) {
-        throw new Error("Nincs dolgozó");
-    }
-    let maxSalary = employees[0].salary;
-    for (const emp of employees) {
-        if (emp.salary > maxSalary) {
-            maxSalary = emp.salary;
-        }
-    }
-    return maxSalary;
-}
+    getMaxSalary(): number {
+        let maxSalary = this.employees[0].salary;
 
-export function getAverageAge(employees: EmployeeStatistics[]): number {
-    if (employees.length === 0) {
-        throw new Error("Nincs dolgozó");
-    }
-    let totalAge = 0;
-    for (const emp of employees) {
-        totalAge += emp.age;
-    }
-    return totalAge / employees.length;
-}
-
-export function getHighestPaidEmployee(employees: EmployeeStatistics[]): EmployeeStatistics {
-    if (employees.length === 0) {
-        throw new Error("Nincs dolgozó");
-    }
-    let highestPaidEmployee = employees[0];
-    for (const emp of employees) {
-        if (emp.salary > highestPaidEmployee.salary) {
-            highestPaidEmployee = emp;
+        for (const emp of this.employees) {
+            if (emp.salary > maxSalary) {
+                maxSalary = emp.salary;
+            }
         }
+
+        return maxSalary;
     }
-    return highestPaidEmployee;
+
+    getAverageAge(): number {
+        let totalAge = 0;
+
+        for (const emp of this.employees) {
+            totalAge += emp.age;
+        }
+
+        return totalAge / this.employees.length;
+    }
+
+    getHighestPaidEmployee(): Employee {
+        let highest = this.employees[0];
+
+        for (const emp of this.employees) {
+            if (emp.salary > highest.salary) {
+                highest = emp;
+            }
+        }
+
+        return highest;
+    }
+
+    countEmployeesOverSalary(salary: number): number {
+        let count = 0;
+
+        for (const emp of this.employees) {
+            if (emp.salary > salary) {
+                count++;
+            }
+        }
+
+        return count;
+    }
 }
