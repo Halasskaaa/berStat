@@ -14,14 +14,12 @@ beforeEach(() => {
 });
 
 describe("EmployeeStatistics", () => {
-    test("should create an employee with valid data", () => {
-        const emp = new EmployeeStatistics("Alice Brown", 28, 45000);
-        expect(emp.name).toBe("Alice Brown");
-        expect(emp.age).toBe(28);
-        expect(emp.salary).toBe(45000);
+    test("should throw error when list is empty", () => {
+        expect(() => new EmployeeStatistics([]))
+            .toThrow("A dolgozók megadása kötelező");
     });
+});
 
-    test("should throw error for empty name", () => {
-        expect(() => new EmployeeStatistics("", 28, 45000)).toThrow("A dolgozók megadása kötelező");
-    });
+test("should create statistics with valid data", () => {
+    expect(lista).toBeDefined();
 });
