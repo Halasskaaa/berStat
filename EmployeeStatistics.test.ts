@@ -81,7 +81,7 @@ describe("countEmployeesOverSalary", () => {
     test("different dataset", () => {
         const stats = new EmployeeStatistics([
             {name: "A", age: 20, salary: 1000},
-            {name: "B", age: 30, salary: 2000}
+            {name: "B", age: 30, salary: 2000},
             {name: "C", age: 40, salary: 3000}
         ]);
         expect(stats.countEmployeesOverSalary(1500)).toBe(2);
