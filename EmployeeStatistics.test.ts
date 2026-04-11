@@ -1,14 +1,16 @@
-import {EmployeeStatistics, getMaxSalary, getAverageAge, getHighestPaidEmployee} from "./EmployeeStatistics.js";
+import { EmployeeStatistics, Employee } from "./EmployeeStatistics";
 import { beforeEach, describe, test, expect } from "vitest";
 
-let lista: EmployeeStatistics[];
+let lista: EmployeeStatistics;
 
 beforeEach(() => {
-    lista = [
-        new EmployeeStatistics("John Doe", 30, 50000),
-        new EmployeeStatistics("Jane Smith", 25, 60000),
-        new EmployeeStatistics("Bob Johnson", 40, 55000)
+    const employees: Employee[] = [
+        { name: "John Doe", age: 30, salary: 50000 },
+        { name: "Jane Smith", age: 25, salary: 60000 },
+        { name: "Bob Johnson", age: 40, salary: 55000 }
     ];
+
+    lista = new EmployeeStatistics(employees);
 });
 
 describe("EmployeeStatistics", () => {
